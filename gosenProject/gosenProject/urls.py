@@ -6,8 +6,8 @@ from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', ),
-    path('forgot_password/', ),
+    # path('login/', ),
+    # path('forgot_password/', ),
 ]
 
 if settings.DEBUG:
