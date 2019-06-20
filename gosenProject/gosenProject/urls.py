@@ -10,7 +10,8 @@ urlpatterns = [
     #path('login/', ),
     #path('forgot_password/', ),
     path('token-auth/', obtain_jwt_token),
-    path('core/', include('core.urls'))
+    path('core/', include('core.urls')),
+    path('accounts/', include('accounts.urls'))
 ]
 
 if settings.DEBUG:
