@@ -153,3 +153,10 @@ CORS_ORIGIN_ALLOW_ALL = True
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'gosenProject.utils.my_jwt_response_handler',
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'actosoftcommunity@gmail.com'
+EMAIL_HOST_PASSWORD = 'vqcblzlzebymhbog'
+EMAIL_USE_TLS = True

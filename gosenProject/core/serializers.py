@@ -7,12 +7,15 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username',)
+        fields = ('username', 'first_name', 'last_name', 'email')
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
 
     token = serializers.SerializerMethodField()
+    email = serializers.CharField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
     password = serializers.CharField(write_only=True)
 
     def get_token(self, obj):
@@ -33,4 +36,4 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('token', 'username', 'password')
+        fields = ('token', 'username', 'first_name', 'last_name', 'email', 'password')
