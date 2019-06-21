@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_rest_passwordreset',
     'corsheaders',
     'accounts',
     'core.apps.CoreConfig'
@@ -160,3 +161,5 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'actosoftcommunity@gmail.com'
 EMAIL_HOST_PASSWORD = 'vqcblzlzebymhbog'
 EMAIL_USE_TLS = True
+
+DJANGO_REST_MULTITOKENAUTH_RESET_TOKEN_EXPIRY_TIME = 24
