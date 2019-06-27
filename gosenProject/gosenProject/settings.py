@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'y&za2-xkczfi+c=%hmn!ca4k^+6=x+eb^_h&c#cp1-7p0)=(by'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
@@ -82,8 +83,11 @@ WSGI_APPLICATION = 'gosenProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        
-        'PORT': '5432'
+        'NAME': config('DATABASE_NAME', default=''),
+        'USER': config('DATABASE_USER', default='actosoft'),
+        'PASSWORD': config('DATABASE_PASSWORD', default=''),
+        'HOST': config('DATABASE_HOST', default='localhost'),
+        'PORT': config('DATABASE_POST', default='5432')
     }
 }
 
@@ -157,10 +161,10 @@ JWT_AUTH = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST="smtp.gmail.com"
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'actosoftcommunity@gmail.com'
-EMAIL_HOST_PASSWORD = 'vqcblzlzebymhbog'
+EMAIL_HOST = config('EMAIL_HOST', 'smpt.gmail.com')
+EMAIL_PORT = config('EMAIL_POST', '')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', '')
 EMAIL_USE_TLS = True
 
 DJANGO_REST_MULTITOKENAUTH_RESET_TOKEN_EXPIRY_TIME = 24
