@@ -160,9 +160,8 @@ JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'gosenProject.utils.my_jwt_response_handler',
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = config('EMAIL_HOST', 'smpt.gmail.com')
-EMAIL_PORT = config('EMAIL_POST', '')
+EMAIL_HOST = config('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = config('EMAIL_PORT', '')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', '')
 EMAIL_USE_TLS = True
