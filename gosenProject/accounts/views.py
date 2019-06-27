@@ -1,4 +1,3 @@
-from celery import app, task
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -9,6 +8,7 @@ from django.dispatch import receiver
 from django.template.loader import get_template, render_to_string
 from django.urls import reverse
 from .tasks import send_email
+from django.http import HttpResponse
 
 from django_rest_passwordreset.signals import reset_password_token_created
 # Create your views here.
@@ -31,6 +31,9 @@ def change_password(request):
 
 @receiver(reset_password_token_created)
 def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
+    print(reset_password_token)
+    print("llego")
+    print(reset_password_token.user)
     """
     Handles password reset tokens
     When a token is created, an e-mail needs to be sent to the user
@@ -43,10 +46,11 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     """
     # send an e-mail to the user
     context = {
-        'current_user': reset_password_token.user,
         'username': reset_password_token.user.username,
         'email': reset_password_token.user.email,
         'reset_password_url': "localhost:3000/reset_password/confirm/{}".format(reset_password_token.key)
     }
 
-    send_email(context, reset_password_token)
+    send_email.delay(context)
+
+    return HttpResponse("listo")
