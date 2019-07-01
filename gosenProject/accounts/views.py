@@ -48,7 +48,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     context = {
         'username': reset_password_token.user.username,
         'email': reset_password_token.user.email,
-        'reset_password_url': "http://localhost:3000/reset_password/confirm/{}".format(reset_password_token.key)
+        'reset_password_url': "http://localhost:3000/restaurar-contrasena/{}".format(reset_password_token.key)
     }
 
     send_email.delay(context)
