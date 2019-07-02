@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_rest_passwordreset',
     'corsheaders',
     'accounts',
+    'Admin',
     'core.apps.CoreConfig',
     'rest_framework_swagger',
 ]

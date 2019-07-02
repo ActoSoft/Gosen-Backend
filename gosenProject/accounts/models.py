@@ -6,6 +6,11 @@ GENDERS_LIST = (
     ('femenino', 'Femenino'),
     ('otro', 'Otro')
 )
+ROLE_LIST = (
+    ('admin', 'Administrador'),
+    ('empleado', 'Empleado'),
+    ('cliente', 'Cliente'),
+)
 
 class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -17,6 +22,10 @@ class Profile (models.Model):
     birth_date = models.DateField(blank=True, null=True)
     gender = models.CharField(choices=GENDERS_LIST, max_length=50)
     photo = models.ImageField(upload_to="image/%Y/%m/%d", default="default.png")
+    role = models.CharField(choices=ROLE_LIST, max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     deleted = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        abstract = True
