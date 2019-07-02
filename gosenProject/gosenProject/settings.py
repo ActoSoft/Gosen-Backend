@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django_rest_passwordreset',
     'corsheaders',
     'accounts',
-    'core.apps.CoreConfig'
+    'core.apps.CoreConfig',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
@@ -137,13 +138,18 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny'
+        'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-    )
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.JSONParser',
+    ),
 }
 
 AUTHENTICATION_BACKENDS = (
