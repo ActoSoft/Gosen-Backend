@@ -26,15 +26,16 @@ class AdminSerializerWrite(serializers.ModelSerializer):
         return profile
 
     def update(self, instance, validated_data):
-        user_data = validated_data.pop('user')
-        user = instance.user
+        if validated_data.get('user'):
+            user_data = validated_data.pop('user')
+            user = instance.user
 
-        user.first_name = user_data.get('first_name', user.first_name)
-        user.last_name = user_data.get('last_name', user.last_name)
-        user.email = user_data.get('email', user.email)
-        user.username = user_data.get('username', user.username)
-        user.is_staff = user_data.get('is_staff', user.is_staff)
-        user.save()
+            user.first_name = user_data.get('first_name', user.first_name)
+            user.last_name = user_data.get('last_name', user.last_name)
+            user.email = user_data.get('email', user.email)
+            user.username = user_data.get('username', user.username)
+            user.is_staff = user_data.get('is_staff', user.is_staff)
+            user.save()
 
         instance.street = validated_data.get('street', instance.street)
         instance.city = validated_data.get('city', instance.city)
