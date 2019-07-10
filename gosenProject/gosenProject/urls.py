@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_swagger.views import get_swagger_view
+from Admin import urls as AdminUrls
 
 schema_view = get_swagger_view(title='Demo Swagger API')
 
@@ -15,7 +16,8 @@ urlpatterns = [
     #path('forgot_password/', ),
     path('token-auth/', obtain_jwt_token),
     path('core/', include('core.urls')),
-    path('accounts/', include('accounts.urls'))
+    path('accounts/', include('accounts.urls')),
+    path('admins/', include(AdminUrls)),
 ]
 
 if settings.DEBUG:
