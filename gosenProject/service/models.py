@@ -14,10 +14,10 @@ PAYMENT_TIPE_LIST = (
 
 
 class Service(models.Model):
-    name = models.CharField(max_length=150, blank=True, null=True)
+    name = models.CharField(max_length=150, blank=False)
     description = models.CharField(max_length=150, blank=True, null=True)
-    cost = models.CharField(max_length=150, blank=True, null=True)
-    payment_tipe = models.CharField(choices=PAYMENT_TIPE_LIST, max_length=100, default='Quincenal')
+    cost = models.DecimalField(max_digits=7, decimal_places=2)
+    payment_type = models.CharField(choices=PAYMENT_TIPE_LIST, max_length=100, default='Quincenal', blank=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     deleted = models.DateTimeField(blank=True, null=True)
