@@ -1,10 +1,10 @@
-from django.shortcuts import render
 from rest_framework import viewsets, status
 from .models import Client
 from rest_framework.response import Response
 from .serializers import ClientSerializerRead, ClientSerializerWrite
 import datetime
 from django.http import JsonResponse
+
 
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.filter(deleted__isnull=True)

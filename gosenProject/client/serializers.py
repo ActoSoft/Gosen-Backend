@@ -3,12 +3,14 @@ from .models import Client
 from accounts.serializers import UserSerializerRead, UserSerializerWrite
 from django.contrib.auth.models import User
 
+
 class ClientSerializerRead(serializers.ModelSerializer):
     user = UserSerializerRead(many=False, required=True)
 
     class Meta:
         model = Client
         fields = '__all__'
+
 
 class ClientSerializerWrite(serializers.ModelSerializer):
     user = UserSerializerWrite(many=False, required=True)
@@ -20,8 +22,9 @@ class ClientSerializerWrite(serializers.ModelSerializer):
     def create(self, validated_data):
         user_data = validated_data.pop('user')
         user = User.objects.create(**user_data)
-        user.set_password(user_data['password'])
-        user.save()
+        if user_data.get('password'):
+            user.set_password(user_data['password'])
+            user.save()
         profile = Client.objects.create(user=user, **validated_data)
         return profile
 
