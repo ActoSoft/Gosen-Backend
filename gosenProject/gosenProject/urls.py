@@ -8,6 +8,7 @@ from rest_framework_swagger.views import get_swagger_view
 from Admin import urls as AdminUrls
 from employee import urls as EmployeeUrls
 from client import urls as ClientUrls
+from service import urls as ServiceUrls
 
 schema_view = get_swagger_view(title='Demo Swagger API')
 
@@ -22,6 +23,7 @@ urlpatterns = [
     path('admins/', include(AdminUrls)),
     path('employees/', include(EmployeeUrls)),
     path('clients/', include(ClientUrls)),
+    path('services/', include(ServiceUrls)),
 ]
 
 if settings.DEBUG:

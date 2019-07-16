@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Admin',
     'employee',
     'client',
+    'service',
     'core.apps.CoreConfig',
     'rest_framework_swagger',
 ]
