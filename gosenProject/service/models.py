@@ -1,10 +1,17 @@
 from django.db import models
 
 PAYMENT_TIPE_LIST = (
+    ('hora', 'Hora'),
+    ('dia', 'Dia'),
     ('semanal', 'Semanal'),
     ('quincenal', 'Quincenal'),
     ('mensual', 'Mensual'),
+    ('bimestral', 'Bimestral'),
+    ('trimestral', 'Trimestral'),
+    ('semestral', 'Semestral'),
+    ('anual', 'Anual')
 )
+
 
 class Service(models.Model):
     name = models.CharField(max_length=150, blank=True, null=True)
