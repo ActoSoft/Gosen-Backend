@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'accounts',
     'Admin',
+    'employee',
+    'client',
+    'service',
     'core.apps.CoreConfig',
     'rest_framework_swagger',
 ]
