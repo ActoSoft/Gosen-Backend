@@ -7,6 +7,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_swagger.views import get_swagger_view
 from Admin import urls as AdminUrls
 from employee import urls as EmployeeUrls
+from client import urls as ClientUrls
 
 schema_view = get_swagger_view(title='Demo Swagger API')
 
@@ -20,6 +21,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('admins/', include(AdminUrls)),
     path('employees/', include(EmployeeUrls)),
+    path('clients/', include(ClientUrls)),
 ]
 
 if settings.DEBUG:
