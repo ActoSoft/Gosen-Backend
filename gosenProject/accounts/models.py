@@ -12,6 +12,7 @@ ROLE_LIST = (
     ('cliente', 'Cliente'),
 )
 
+
 class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     street = models.CharField(max_length=150, blank=True, null=True)

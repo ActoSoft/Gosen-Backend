@@ -3,12 +3,14 @@ from .models import Employee
 from accounts.serializers import UserSerializerRead, UserSerializerWrite
 from django.contrib.auth.models import User
 
+
 class EmployeeSerializerRead(serializers.ModelSerializer):
     user = UserSerializerRead(many=False, required=True)
 
     class Meta:
         model = Employee
         fields = '__all__'
+
 
 class EmployeeSerializerWrite(serializers.ModelSerializer):
     user = UserSerializerWrite(many=False, required=True)

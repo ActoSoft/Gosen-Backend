@@ -8,6 +8,7 @@ PAYMENT_TIPE_LIST = (
     ('mensual', 'Mensual'),
 )
 
+
 class Employee(Profile):
     contract_date_start = models.DateTimeField(blank=True, null=True)
     contracted_by = models.OneToOneField(User, on_delete=models.CASCADE, related_name='contractor', blank=True, null=True)
