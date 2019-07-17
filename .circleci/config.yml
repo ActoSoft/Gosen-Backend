@@ -8,6 +8,7 @@ jobs:
     machine:
       enabled: true
       steps:
+        - checkout
         - run:
             name: Deploy Over SSH
             command: |
