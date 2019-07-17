@@ -1,0 +1,23 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2.0
+jobs:
+  deploy:
+    machine:
+      enabled: true
+      steps:
+        - run:
+            name: Deploy Over SSH
+            command: |
+              ssh $SSH_USER@SSH_HOST "gosen_backend_pull && migrate && restart_all"
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: develop
