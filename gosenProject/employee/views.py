@@ -14,7 +14,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
             return EmployeeSerializerRead
         return EmployeeSerializerWrite
 
-    def destroy(self, request, pk=None):
+    def destroy(self, request, pk=None, *args, **kwargs):
         try:
             employee = self.get_object()
         except Exception as e:
