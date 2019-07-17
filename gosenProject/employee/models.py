@@ -3,9 +3,15 @@ from accounts.models import Profile
 from Admin.models import Admin
 
 PAYMENT_TYPE_LIST = (
+    ('hora', 'Hora'),
+    ('dia', 'Dia'),
     ('semanal', 'Semanal'),
     ('quincenal', 'Quincenal'),
     ('mensual', 'Mensual'),
+    ('bimestral', 'Bimestral'),
+    ('trimestral', 'Trimestral'),
+    ('semestral', 'Semestral'),
+    ('anual', 'Anual')
 )
 
 
