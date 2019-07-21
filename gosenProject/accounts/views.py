@@ -1,17 +1,13 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-from django.core.mail import EmailMultiAlternatives
 from django.dispatch import receiver
-from django.template.loader import get_template, render_to_string
-from django.urls import reverse
 from .tasks import send_email
 from django.http import HttpResponse
-
 from django_rest_passwordreset.signals import reset_password_token_created
-# Create your views here.
+from django.conf import settings
+
 
 def change_password(request):
     if request.method == 'POST':
@@ -29,6 +25,7 @@ def change_password(request):
         args = {'form': form}
         return render(request, 'accounts/change_password.html', args)
 
+
 @receiver(reset_password_token_created)
 def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
     """
@@ -45,9 +42,9 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
     context = {
         'username': reset_password_token.user.username,
         'email': reset_password_token.user.email,
-        'reset_password_url': "http://localhost:3000/restaurar-contrasena/{}".format(reset_password_token.key)
+        'reset_password_url': "{}/restaurar-contrasena/{}".format(settings.FRONTEND_URL, reset_password_token.key)
     }
 
     send_email.delay(context)
 
-    return HttpResponse("listo")
+    return HttpResponse("OK")

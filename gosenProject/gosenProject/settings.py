@@ -164,9 +164,9 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-#CORS_ORIGIN_WHITELIST = (
+# CORS_ORIGIN_WHITELIST = (
 #    'localhost:3000'
-#)
+# )
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -181,3 +181,5 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', '')
 EMAIL_USE_TLS = True
 
 DJANGO_REST_MULTITOKENAUTH_RESET_TOKEN_EXPIRY_TIME = 24
+
+FRONTEND_URL = config('FRONTEND_URL', 'http://localhost')
