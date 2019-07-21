@@ -18,7 +18,7 @@ class ClientViewSet(viewsets.ModelViewSet):
         try:
             client = self.get_object()
         except Exception as e:
-            print(e)
+            raise e
             return Response(status=status.HTTP_404_NOT_FOUND)
         now = datetime.datetime.now()
         client.deleted = now
