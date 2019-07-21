@@ -20,3 +20,4 @@ db.sqlite3
 gosenProject/db.sqlite3
 .idea/
 gosenProject/.idea/
+.vscode
