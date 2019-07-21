@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from Admin.serializers import AdminSerializerRead
 
 
-
 class EmployeeSerializerRead(serializers.ModelSerializer):
     user = UserSerializerRead(many=False, required=True)
     contracted_by = AdminSerializerRead(many=False, required=False)

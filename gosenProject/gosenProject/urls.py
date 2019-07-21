@@ -15,8 +15,6 @@ schema_view = get_swagger_view(title='Demo Swagger API')
 urlpatterns = [
     path('swagger/', schema_view),
     path('admin/', admin.site.urls),
-    #path('login/', ),
-    #path('forgot_password/', ),
     path('token-auth/', obtain_jwt_token),
     path('core/', include('core.urls')),
     path('accounts/', include('accounts.urls')),

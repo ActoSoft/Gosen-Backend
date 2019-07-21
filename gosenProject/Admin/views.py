@@ -6,6 +6,7 @@ from .serializers import AdminSerializerRead, AdminSerializerWrite
 import datetime
 from django.http import JsonResponse
 
+
 class AdminViewSet(viewsets.ModelViewSet):
     queryset = Admin.objects.filter(deleted__isnull=True)
 

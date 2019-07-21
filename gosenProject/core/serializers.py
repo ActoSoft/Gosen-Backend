@@ -39,8 +39,10 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         model = User
         fields = ('token', 'username', 'first_name', 'last_name', 'email', 'password')
 
+
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(many=False, required=True)
+
     class Meta:
         model = Profile
         fields = '__all__'

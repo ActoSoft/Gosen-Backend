@@ -3,6 +3,7 @@ from django.template.loader import get_template, render_to_string
 from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
 from django.conf import settings
 
+
 @task
 def send_email(context):
     print(context)
