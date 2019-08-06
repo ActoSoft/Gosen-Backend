@@ -4,6 +4,14 @@ from accounts.serializers import UserSerializerRead, UserSerializerWrite
 from django.contrib.auth.models import User
 
 
+class AdminSerializerOnlyIdAndUser(serializers.ModelSerializer):
+    user = UserSerializerRead(many=False, required=True)
+
+    class Meta:
+        model = Admin
+        fields = ('id', 'user')
+
+
 class AdminSerializerRead(serializers.ModelSerializer):
     user = UserSerializerRead(many=False, required=True)
 
