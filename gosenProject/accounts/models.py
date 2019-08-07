@@ -24,6 +24,7 @@ class Profile (models.Model):
     gender = models.CharField(choices=GENDERS_LIST, max_length=50)
     photo = models.ImageField(upload_to="image/%Y/%m/%d", default="default.png")
     role = models.CharField(choices=ROLE_LIST, max_length=100)
+    zip_code = models.CharField(max_length=6, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     deleted = models.DateTimeField(blank=True, null=True)
