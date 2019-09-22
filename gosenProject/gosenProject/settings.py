@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'employee',
     'client',
     'service',
+    'stocks',
     'core.apps.CoreConfig',
     'rest_framework_swagger',
 ]
