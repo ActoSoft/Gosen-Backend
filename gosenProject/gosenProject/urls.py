@@ -10,6 +10,7 @@ from employee import urls as EmployeeUrls
 from client import urls as ClientUrls
 from service import urls as ServiceUrls
 from stocks import urls as StockUrls
+from products import urls as ProductUrls
 
 schema_view = get_swagger_view(title='Demo Swagger API')
 
@@ -23,7 +24,8 @@ urlpatterns = [
     path('employees/', include(EmployeeUrls)),
     path('clients/', include(ClientUrls)),
     path('services/', include(ServiceUrls)),
-    path('stocks/', include(StockUrls))
+    path('stocks/', include(StockUrls)),
+    path('products/', include(ProductUrls))
 ]
 
 if settings.DEBUG:
