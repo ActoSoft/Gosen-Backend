@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Product, ProductImage
-from stocks.serializers import StockSerializer
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -9,10 +8,9 @@ class ProductImageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ProductSerializer(serializers.ModelSerializer):
+class ProductOnlyReadSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many=True, required=False)
-    stocks = StockSerializer(many=True)
 
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ['name', 'description', 'barcode', 'qty', 'images']
