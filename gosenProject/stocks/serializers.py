@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from .models import Stock
-from products.preserializers import ProductOnlyReadSerializer
+from products.preserializers import ProductStockSerializer
 
 
 class StockSerializer(serializers.ModelSerializer):
-    products = ProductOnlyReadSerializer(many=True)
+    products = ProductStockSerializer(many=True)
 
     class Meta:
         model = Stock

@@ -6,8 +6,6 @@ class Product(models.Model):
     barcode = models.CharField(max_length=50, blank=True, null=True)
     name = models.CharField(max_length=140)
     description = models.TextField()
-    qty = models.PositiveIntegerField()
-    stocks = models.ManyToManyField(Stock, related_name='products')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     deleted = models.DateTimeField(blank=True, null=True)
@@ -24,3 +22,15 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return self.product.name
+
+
+class ProductStock(models.Model):
+    product = models.ForeignKey(Product, related_name='stocks', on_delete=models.CASCADE)
+    stock = models.ForeignKey(Stock, related_name='products', on_delete=models.CASCADE)
+    qty = models.PositiveIntegerField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    deleted = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.product.name} - Stock: {self.stock.name}'
