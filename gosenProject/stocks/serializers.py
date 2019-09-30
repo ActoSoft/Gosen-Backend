@@ -4,7 +4,7 @@ from products.preserializers import ProductStockSerializer
 
 
 class StockSerializer(serializers.ModelSerializer):
-    products = ProductStockSerializer(many=True)
+    products = ProductStockSerializer(many=True, required=False)
 
     class Meta:
         model = Stock

@@ -11,7 +11,7 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many=True, required=False)
-    stocks = StockProductSerializer(many=True)
+    stocks = StockProductSerializer(many=True, required=False)
 
     class Meta:
         model = Product
