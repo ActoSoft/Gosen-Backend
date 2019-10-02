@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, views
 from .models import Admin
 from rest_framework.response import Response
 from .serializers import AdminSerializerRead, AdminSerializerWrite
@@ -25,3 +25,16 @@ class AdminViewSet(viewsets.ModelViewSet):
         admin.deleted = now
         admin.save()
         return JsonResponse({'message': 'ok'})
+
+
+class UpdateImage(views.APIView):
+    def post(self, request):
+        admin = Admin.objects.get(id=request.data['id'])
+        print(admin)
+        if request.data.get('photo'):
+            admin.photo = request.data['photo']
+            admin.save()
+            adminSerialized = AdminSerializerRead(admin)
+            return Response(adminSerialized.data)
+        else:
+            return JsonResponse({'message': 'Imagen inválida'})
