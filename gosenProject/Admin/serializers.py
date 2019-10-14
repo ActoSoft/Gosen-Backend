@@ -30,7 +30,8 @@ class AdminSerializerWrite(serializers.ModelSerializer):
     def create(self, validated_data):
         user_data = validated_data.pop('user')
         user = User.objects.create(**user_data)
-        user.set_password(user_data['password'])
+        if user_data.get('password'):
+            user.set_password(user_data['password'])
         user.save()
         profile = Admin.objects.create(user=user, **validated_data)
         return profile
