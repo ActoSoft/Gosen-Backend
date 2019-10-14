@@ -4,12 +4,14 @@ from .serializers import ProductSerializer
 import datetime
 from rest_framework import viewsets, status, response, parsers
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.filter(deleted__isnull=True)
     serializer_class = ProductSerializer
     parser_classes = [parsers.MultiPartParser]
+    permission_classes = (IsAuthenticated, )
 
     def create(self, request):
         if not request.data.get('barcode'):

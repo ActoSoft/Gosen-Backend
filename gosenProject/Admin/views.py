@@ -5,11 +5,12 @@ from rest_framework.response import Response
 from .serializers import AdminSerializerRead, AdminSerializerWrite
 import datetime
 from django.http import JsonResponse
+from rest_framework.permissions import IsAuthenticated
 
 
 class AdminViewSet(viewsets.ModelViewSet):
     queryset = Admin.objects.filter(deleted__isnull=True)
-
+    permission_classes = (IsAuthenticated, )
     def get_serializer_class(self):
         if self.request.method in ['GET']:
             return AdminSerializerRead
