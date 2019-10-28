@@ -49,6 +49,7 @@ class ClientSerializerWrite(serializers.ModelSerializer):
         instance.gender = validated_data.get('gender', instance.gender)
         instance.photo = validated_data.get('photo', instance.photo)
         instance.role = validated_data.get('role', instance.role)
+        instance.zip_code = validated_data.get('zip_code', instance.zip_code)
         instance.save()
 
         return instance

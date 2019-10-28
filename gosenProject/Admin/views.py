@@ -31,7 +31,6 @@ class AdminViewSet(viewsets.ModelViewSet):
 class UpdateImage(views.APIView):
     def post(self, request):
         admin = Admin.objects.get(id=request.data['id'])
-        print(admin)
         if request.data.get('photo'):
             admin.photo = request.data['photo']
             admin.save()

@@ -32,6 +32,7 @@ class EmployeeSerializerWrite(serializers.ModelSerializer):
         return profile
 
     def update(self, instance, validated_data):
+        print(validated_data)
         if validated_data.get('user'):
             user_data = validated_data.pop('user')
             user = instance.user

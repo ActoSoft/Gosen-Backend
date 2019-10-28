@@ -29,11 +29,10 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 class UpdateImage(views.APIView):
     def post(self, request):
         employee = Employee.objects.get(id=request.data['id'])
-        print(admin)
         if request.data.get('photo'):
             employee.photo = request.data['photo']
             employee.save()
-            employeeSerialized = EmployeeSerializerRead(admin)
+            employeeSerialized = EmployeeSerializerRead(employee)
             return Response(employeeSerialized.data)
         else:
             return JsonResponse({'message': 'Imagen inválida'})
