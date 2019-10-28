@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class AdminViewSet(viewsets.ModelViewSet):
     queryset = Admin.objects.filter(deleted__isnull=True)
-    permission_classes = (IsAuthenticated, )
+    # permission_classes = (IsAuthenticated, )
     def get_serializer_class(self):
         if self.request.method in ['GET']:
             return AdminSerializerRead
