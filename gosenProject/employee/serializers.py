@@ -52,6 +52,7 @@ class EmployeeSerializerWrite(serializers.ModelSerializer):
         instance.gender = validated_data.get('gender', instance.gender)
         instance.photo = validated_data.get('photo', instance.photo)
         instance.role = validated_data.get('role', instance.role)
+        instance.zip_code = validated_data.get('zip_code', instance.zip_code)
         instance.contract_date_start = validated_data.get('contract_date_start', instance.contract_date_start)
         instance.contracted_by = validated_data.get('contracted_by', instance.contracted_by)
         instance.vigency = validated_data.get('vigency', instance.vigency)
