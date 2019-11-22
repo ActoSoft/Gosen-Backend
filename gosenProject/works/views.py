@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework import viewsets, status
+from .models import Work, WorkEmployee
+from .serializers import WorkSerializer
 
-# Create your views here.
+
+class WorkViewSet(viewsets.ModelViewSet):
+    queryset = Work.objects.filter(deleted__isnull=True)
+    serializer_class = WorkSerializer
