@@ -4,15 +4,15 @@ from accounts.serializers.nested import BasicUserSerializerRead, BasicUserSerial
 from django.contrib.auth.models import User
 
 
-class AdminSerializerOnlyIdAndUser(serializers.ModelSerializer):
+class AdminListSerializer(serializers.ModelSerializer):
     user = BasicUserSerializerRead(many=False, required=True)
 
     class Meta:
         model = Admin
-        fields = ('id', 'user')
+        fields = ['id', 'user']
 
 
-class AdminSerializerRead(serializers.ModelSerializer):
+class AdminDetailSerializer(serializers.ModelSerializer):
     user = BasicUserSerializerRead(many=False, required=True)
 
     class Meta:

@@ -4,7 +4,15 @@ from accounts.serializers.nested import BasicUserSerializerRead, BasicUserSerial
 from django.contrib.auth.models import User
 
 
-class ClientSerializerRead(serializers.ModelSerializer):
+class ClientListSerializer(serializers.ModelSerializer):
+    user = BasicUserSerializerRead(many=False, required=True)
+
+    class Meta:
+        model = Client
+        fields = ['id', 'user']
+
+
+class ClientDetailSerializer(serializers.ModelSerializer):
     user = BasicUserSerializerRead(many=False, required=True)
 
     class Meta:

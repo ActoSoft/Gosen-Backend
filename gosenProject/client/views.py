@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status, views
 from .models import Client
 from rest_framework.response import Response
-from .serializers.common import ClientSerializerRead, ClientSerializerWrite
+from .serializers.common import ClientListSerializer, ClientDetailSerializer, ClientSerializerWrite
 import datetime
 from django.http import JsonResponse
 
@@ -12,7 +12,9 @@ class ClientViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.request.method in ['GET']:
-            return ClientSerializerRead
+            if self.action == "retrieve":
+                return ClientDetailSerializer
+            return ClientListSerializer
         return ClientSerializerWrite
 
     def destroy(self, request, pk=None, *args, **kwargs):
@@ -33,7 +35,7 @@ class UpdateImage(views.APIView):
         if request.data.get('photo'):
             client.photo = request.data['photo']
             client.save()
-            client_serialized = ClientSerializerRead(client)
+            client_serialized = ClientDetailSerializer(client)
             return Response(client_serialized.data)
         else:
             return JsonResponse({'message': 'Imagen inválida'})

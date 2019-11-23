@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status, views
 from .models import Admin
 from rest_framework.response import Response
-from Admin.serializers.common import AdminSerializerRead, AdminSerializerWrite
+from Admin.serializers.common import AdminListSerializer, AdminDetailSerializer, AdminSerializerWrite
 import datetime
 from django.http import JsonResponse
 
@@ -12,7 +12,9 @@ class AdminViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.request.method in ['GET']:
-            return AdminSerializerRead
+            if self.action == "retrieve":
+                return AdminDetailSerializer
+            return AdminListSerializer
         return AdminSerializerWrite
 
     def destroy(self, request, pk=None, *args, **kwargs):
@@ -33,7 +35,7 @@ class UpdateImage(views.APIView):
         if request.data.get('photo'):
             admin.photo = request.data['photo']
             admin.save()
-            admin_serialized = AdminSerializerRead(admin)
+            admin_serialized = AdminDetailSerializer(admin)
             return Response(admin_serialized.data)
         else:
             return JsonResponse({'message': 'Imagen inválida'})
