@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import Client
-from accounts.serializers import UserSerializerRead, UserSerializerWrite
+from client.models import Client
+from accounts.serializers.nested import BasicUserSerializerRead, BasicUserSerializerWrite
 from django.contrib.auth.models import User
 
 
 class ClientSerializerRead(serializers.ModelSerializer):
-    user = UserSerializerRead(many=False, required=True)
+    user = BasicUserSerializerRead(many=False, required=True)
 
     class Meta:
         model = Client
@@ -13,7 +13,7 @@ class ClientSerializerRead(serializers.ModelSerializer):
 
 
 class ClientSerializerWrite(serializers.ModelSerializer):
-    user = UserSerializerWrite(many=False, required=True)
+    user = BasicUserSerializerWrite(many=False, required=True)
 
     class Meta:
         model = Client

@@ -1,5 +1,4 @@
-from core.serializers import ProfileSerializer
-from Admin.serializers import AdminSerializerOnlyIdAndUser
+from Admin.serializers.common import AdminSerializerOnlyIdAndUser
 from Admin.models import Admin
 
 

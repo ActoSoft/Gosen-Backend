@@ -1,10 +1,11 @@
 from rest_framework import serializers
-from .models import Service
-from works.pre_serializers import WorkSerializerOnlyRead
+from ..models import Service
+from works.serializers.nested import WorkSerializerWithClient
 
 
 class ServiceSerializer(serializers.ModelSerializer):
-    works = WorkSerializerOnlyRead(required=False, many=True)
+    works = WorkSerializerWithClient(many=True, required=False)
+
     class Meta:
         model = Service
         fields = '__all__'

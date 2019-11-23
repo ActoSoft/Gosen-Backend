@@ -1,30 +1,25 @@
 from rest_framework import serializers
-from .models import Admin
-from accounts.serializers import UserSerializerRead, UserSerializerWrite
+from employee.models import Employee
+from accounts.serializers.nested import BasicUserSerializerRead, BasicUserSerializerWrite
 from django.contrib.auth.models import User
+from Admin.serializers.nested import BasicAdminSerializer
 
 
-class AdminSerializerOnlyIdAndUser(serializers.ModelSerializer):
-    user = UserSerializerRead(many=False, required=True)
-
-    class Meta:
-        model = Admin
-        fields = ('id', 'user')
-
-
-class AdminSerializerRead(serializers.ModelSerializer):
-    user = UserSerializerRead(many=False, required=True)
+class EmployeeSerializerRead(serializers.ModelSerializer):
+    user = BasicUserSerializerRead(many=False, required=True)
+    contracted_by = BasicAdminSerializer(many=False, required=False)
+    fired_by = BasicAdminSerializer(many=False, required=False)
 
     class Meta:
-        model = Admin
+        model = Employee
         fields = '__all__'
 
 
-class AdminSerializerWrite(serializers.ModelSerializer):
-    user = UserSerializerWrite(many=False, required=True)
+class EmployeeSerializerWrite(serializers.ModelSerializer):
+    user = BasicUserSerializerWrite(many=False, required=True)
 
     class Meta:
-        model = Admin
+        model = Employee
         fields = '__all__'
 
     def create(self, validated_data):
@@ -32,11 +27,12 @@ class AdminSerializerWrite(serializers.ModelSerializer):
         user = User.objects.create(**user_data)
         if user_data.get('password'):
             user.set_password(user_data['password'])
-        user.save()
-        profile = Admin.objects.create(user=user, **validated_data)
+            user.save()
+        profile = Employee.objects.create(user=user, **validated_data)
         return profile
 
     def update(self, instance, validated_data):
+        print(validated_data)
         if validated_data.get('user'):
             user_data = validated_data.pop('user')
             user = instance.user
@@ -58,6 +54,16 @@ class AdminSerializerWrite(serializers.ModelSerializer):
         instance.photo = validated_data.get('photo', instance.photo)
         instance.role = validated_data.get('role', instance.role)
         instance.zip_code = validated_data.get('zip_code', instance.zip_code)
+        instance.contract_date_start = validated_data.get('contract_date_start', instance.contract_date_start)
+        instance.contracted_by = validated_data.get('contracted_by', instance.contracted_by)
+        instance.vigency = validated_data.get('vigency', instance.vigency)
+        instance.salary = validated_data.get('salary', instance.salary)
+        instance.payment_type = validated_data.get('payment_type', instance.payment_type)
+        instance.active = validated_data.get('active', instance.active)
+        instance.fired = validated_data.get('fired', instance.fired)
+        instance.fired_date = validated_data.get('fired_date', instance.fired_date)
+        instance.fired_by = validated_data.get('fired_by', instance.fired_by)
+        instance.available = validated_data.get('available', instance.available)
         instance.save()
 
         return instance

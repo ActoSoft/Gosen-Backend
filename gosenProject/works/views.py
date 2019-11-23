@@ -1,6 +1,6 @@
-from rest_framework import viewsets, status
-from .models import Work, WorkEmployee
-from .serializers import WorkSerializer
+from rest_framework import viewsets
+from .models import Work
+from .serializers.common import WorkSerializer
 
 
 class WorkViewSet(viewsets.ModelViewSet):

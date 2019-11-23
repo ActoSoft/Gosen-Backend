@@ -1,6 +1,6 @@
 from rest_framework import viewsets, status
 from .models import Service
-from .serializers import ServiceSerializer
+from .serializers.common import ServiceSerializer
 import datetime
 from rest_framework.response import Response
 from django.http import JsonResponse
@@ -14,6 +14,7 @@ class ServiceViewSet(viewsets.ModelViewSet):
         try:
             service = self.get_object()
         except Exception as e:
+            print(e)
             return Response(status=status.HTTP_404_NOT_FOUND)
         now = datetime.datetime.now()
         service.deleted = now
