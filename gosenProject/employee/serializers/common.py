@@ -5,7 +5,15 @@ from django.contrib.auth.models import User
 from Admin.serializers.nested import BasicAdminSerializer
 
 
-class EmployeeSerializerRead(serializers.ModelSerializer):
+class EmployeeListSerializer(serializers.ModelSerializer):
+    user = BasicUserSerializerRead(many=False, required=True)
+
+    class Meta:
+        model = Employee
+        fields = ['id', 'user']
+
+
+class EmployeeDetailSerializer(serializers.ModelSerializer):
     user = BasicUserSerializerRead(many=False, required=True)
     contracted_by = BasicAdminSerializer(many=False, required=False)
     fired_by = BasicAdminSerializer(many=False, required=False)

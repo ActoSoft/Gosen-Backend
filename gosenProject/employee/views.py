@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status, views
 from .models import Employee
 from rest_framework.response import Response
-from .serializers.common import EmployeeSerializerRead, EmployeeSerializerWrite
+from .serializers.common import EmployeeDetailSerializer, EmployeeSerializerWrite, EmployeeListSerializer
 import datetime
 from django.http import JsonResponse
 
@@ -12,7 +12,9 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.request.method in ['GET']:
-            return EmployeeSerializerRead
+            if self.action == 'retrieve':
+                return EmployeeDetailSerializer
+            return EmployeeListSerializer
         return EmployeeSerializerWrite
 
     def destroy(self, request, pk=None, *args, **kwargs):
@@ -33,7 +35,7 @@ class UpdateImage(views.APIView):
         if request.data.get('photo'):
             employee.photo = request.data['photo']
             employee.save()
-            employee_serialized = EmployeeSerializerRead(employee)
+            employee_serialized = EmployeeDetailSerializer(employee)
             return Response(employee_serialized.data)
         else:
             return JsonResponse({'message': 'Imagen inválida'})
