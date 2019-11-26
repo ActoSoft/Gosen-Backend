@@ -1,8 +1,7 @@
-from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
 from .models import Stock
-from .serializers import StockSerializer
+from .serializers.common import StockListSerializer, StockDetailSerializer
 import datetime
 from rest_framework.response import Response
 from django.http import JsonResponse
@@ -10,7 +9,11 @@ from django.http import JsonResponse
 
 class StockViewSet(ModelViewSet):
     queryset = Stock.objects.filter(deleted__isnull=True)
-    serializer_class = StockSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return StockDetailSerializer
+        return StockListSerializer
 
     def destroy(self, request, pk=None, *args, **kwargs):
         try:
