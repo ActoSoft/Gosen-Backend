@@ -19,10 +19,11 @@ class ProductStockSerializer(serializers.ModelSerializer):
 
 
 class ProductListSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True, required=False)
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'description']
+        fields = ['id', 'name', 'description', 'images']
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):
