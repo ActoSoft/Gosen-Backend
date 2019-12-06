@@ -1,5 +1,5 @@
 from .models import Product, ProductImage
-from .serializers.common import ProductListSerializer, ProductDetailSerializer
+from .serializers.common import ProductListSerializer, ProductDetailSerializer, ProductCreateSerializer
 import datetime
 from rest_framework import viewsets, status, parsers
 from rest_framework.response import Response
@@ -9,12 +9,14 @@ from rest_framework.permissions import IsAuthenticated
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.filter(deleted__isnull=True)
-    parser_classes = [parsers.MultiPartParser]
+    # parser_classes = [parsers.MultiPartParser]
     # permission_classes = (IsAuthenticated, )
 
     def get_serializer_class(self):
         if self.action == 'retrieve':
             return ProductDetailSerializer
+        elif self.action == 'create':
+            return ProductCreateSerializer
         else:
             return ProductListSerializer
 
