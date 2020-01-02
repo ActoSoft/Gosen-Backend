@@ -6,5 +6,6 @@ class BasicStockSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Stock
-        fields = ['id', 'name', 'address']
+        fields = ['id', 'name', 'address', 'description', 'deleted']
+
 

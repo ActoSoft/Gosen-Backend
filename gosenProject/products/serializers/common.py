@@ -15,7 +15,7 @@ class ProductStockSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductStock
-        fields = ['stock', 'qty']
+        fields = ['id', 'stock', 'qty', 'deleted']
 
 
 class ProductListSerializer(serializers.ModelSerializer):
