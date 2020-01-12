@@ -6,7 +6,6 @@ router = DefaultRouter()
 
 router.register('', ProductViewSet)
 
-
 urlpatterns = [
     path('upload_image/', UploadImage.as_view()),
     path('delete_image/', DeleteImage.as_view()),

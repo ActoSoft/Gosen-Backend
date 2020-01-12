@@ -2,16 +2,14 @@ from .models import Product, ProductImage, ProductStock
 from stocks.models import Stock
 from .serializers.common import ProductListSerializer, ProductDetailSerializer, ProductCreateSerializer, ProductStockSerializer
 import datetime
-from rest_framework import viewsets, status, parsers, views
+from rest_framework import viewsets, status, views
 from rest_framework.response import Response
 from django.http import JsonResponse
-from django.utils import timezone
 from rest_framework.permissions import IsAuthenticated
 
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.filter(deleted__isnull=True)
-    # parser_classes = [parsers.MultiPartParser]
     # permission_classes = (IsAuthenticated, )
 
     def get_serializer_class(self):

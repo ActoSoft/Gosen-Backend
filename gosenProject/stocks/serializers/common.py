@@ -9,7 +9,7 @@ class StockProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductStock
-        fields = ['product', 'qty']
+        fields = ['id', 'product', 'qty']
 
 
 class StockListSerializer(serializers.ModelSerializer):
