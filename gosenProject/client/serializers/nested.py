@@ -8,4 +8,4 @@ class BasicClientSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Client
-        fields = '__all__'
+        fields = ['id', 'user', 'photo']

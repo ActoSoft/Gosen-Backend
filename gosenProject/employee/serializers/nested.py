@@ -8,5 +8,5 @@ class BasicEmployeeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Employee
-        fields = '__all__'
+        fields = ['id', 'user', 'photo']
 

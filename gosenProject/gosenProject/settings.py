@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'stocks',
     'products',
     'works',
+    'financials',
     'core.apps.CoreConfig',
     'rest_framework_swagger',
 ]
