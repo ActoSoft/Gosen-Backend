@@ -3,6 +3,8 @@ from service.models import Service
 from client.models import Client
 from employee.models import Employee
 # Create your models here.
+
+
 class Work(models.Model):
     STATUS_CHOICES = [
         ('in_progress', 'En Curso'),
@@ -16,6 +18,7 @@ class Work(models.Model):
     payed = models.DecimalField(max_digits=8, decimal_places=2)
     to_pay = models.DecimalField(max_digits=8, decimal_places=2)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")
+    description = models.TextField(blank=True, null=True)
     datetime_start = models.DateTimeField()
     datetime_end = models.DateTimeField()
     service = models.ForeignKey(Service, related_name='works', on_delete=models.CASCADE)
