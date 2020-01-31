@@ -58,3 +58,37 @@ class CreateWork(views.APIView):
         except Exception as e:
             print(e)
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateWork(views.APIView):
+    def post(self, request):
+        try:
+            data = request.data
+            if not data.get('id') or data['id'] is None:
+                return Response({'message': 'Trabajo no existente o inválido'}, status=status.HTTP_400_BAD_REQUEST)
+            if not data.get('clientId') or data['clientId'] is None:
+                return Response({'message': 'Cliente no existente o inválido'}, status=status.HTTP_400_BAD_REQUEST)
+            if not data.get('serviceId') or data['serviceId'] is None:
+                return Response({'message': 'Servicio no existente o inválido'}, status=status.HTTP_400_BAD_REQUEST)
+            if not data.get('employeesId') or data['employeesId'] is None or len(data['employeesId']) < 1:
+                return Response({'message': 'Empleados nos existentes o inválidos'}, status=status.HTTP_400_BAD_REQUEST)
+            client = Client.objects.get(id=data['clientId'])
+            service = Service.objects.get(id=data['serviceId'])
+            work = Work.objects.get(id=data['id'])
+            work.client = client
+            work.service = service
+            work.datetime_start = data['dateStart']
+            work.datetime_end = data['dateEnd']
+            work.status = data['status']
+            work.qty = data['qty']
+            work.total = data['total']
+            work.to_pay = data['toPay']
+            work.description = data['description']
+            work.save()
+
+            work_serializer = WorkDetailSerializer(work)
+            return Response(work_serializer.data)
+
+        except Exception as e:
+            print(e)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
