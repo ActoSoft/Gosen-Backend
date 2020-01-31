@@ -86,7 +86,22 @@ class UpdateWork(views.APIView):
             work.description = data['description']
             work.save()
 
-            work_serializer = WorkDetailSerializer(work)
+            if data.get('newEmployees'):
+                for new_employee in data['newEmployees']:
+                    employee = Employee.objects.get(id=new_employee)
+                    WorkEmployee.objects.create(
+                        employee=employee,
+                        work=work
+                    )
+
+            if data.get('removedEmployees'):
+                for removed_employee in data['removedEmployees']:
+                    print(removed_employee)
+                    print(work.id)
+                    work_employee_to_delete = WorkEmployee.objects.filter(employee__id=removed_employee, work=work)
+                    print(work_employee_to_delete)
+                    work_employee_to_delete.delete()
+            work_serializer = WorkDetailSerializer(Work.objects.get(id=work.id))
             return Response(work_serializer.data)
 
         except Exception as e:
