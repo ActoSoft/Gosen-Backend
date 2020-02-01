@@ -13,49 +13,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='employee',
-            name='active',
-            field=models.BooleanField(default=True),
-        ),
-        migrations.AddField(
-            model_name='employee',
-            name='available',
-            field=models.BooleanField(default=True),
-        ),
-        migrations.AddField(
-            model_name='employee',
-            name='contracted_by',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='contractor', to=settings.AUTH_USER_MODEL),
-        ),
-        migrations.AddField(
-            model_name='employee',
-            name='fired',
-            field=models.BooleanField(default=False),
-        ),
-        migrations.AddField(
-            model_name='employee',
-            name='fired_by',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='firer', to=settings.AUTH_USER_MODEL),
-        ),
-        migrations.AddField(
-            model_name='employee',
-            name='fired_date',
-            field=models.DateTimeField(auto_now=True),
-        ),
-        migrations.AddField(
-            model_name='employee',
-            name='payment_tipe',
-            field=models.CharField(choices=[('semanal', 'Semanal'), ('quincenal', 'Quincenal'), ('mensual', 'Mensual')], default='Quincenal', max_length=100),
-        ),
-        migrations.AddField(
-            model_name='employee',
-            name='salary',
-            field=models.CharField(blank=True, max_length=150, null=True),
-        ),
-        migrations.AddField(
-            model_name='employee',
-            name='vigency',
-            field=models.CharField(blank=True, max_length=150, null=True),
-        ),
     ]
