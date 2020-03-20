@@ -14,9 +14,15 @@ PAYMENT_TYPE_LIST = (
     ('anual', 'Anual')
 )
 
+ROLE_LIST = (
+    ('sales', 'Ventas'),
+    ('internal', 'Interno')
+)
+
 
 class Employee(Profile):
     contract_date_start = models.DateField(blank=True, null=True)
+    role = models.CharField(max_length=20, choices=ROLE_LIST)
     contracted_by = models.ForeignKey(Admin, on_delete=models.CASCADE, related_name='contractor', blank=True, null=True)
     vigency = models.CharField(max_length=150, blank=True, null=True)
     salary = models.CharField(max_length=150, blank=True, null=True)
