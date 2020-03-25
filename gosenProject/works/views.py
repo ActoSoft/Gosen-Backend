@@ -4,6 +4,7 @@ from .models import Work, WorkEmployee
 from client.models import Client
 from service.models import Service
 from employee.models import Employee
+from financials.models import Transaction
 from .serializers.common import WorkListSerializer, WorkDetailSerializer
 from rest_framework.permissions import IsAuthenticated
 
@@ -50,9 +51,19 @@ class CreateWork(views.APIView):
                         employee=employee,
                         work=work
                     )
-                work_with_employees = Work.objects.get(id=work.id)
-                work_serializer = WorkDetailSerializer(work_with_employees)
-                return Response(work_serializer.data)
+                transaction = Transaction.objects.create(
+                    amount=data['payed'],
+                    concept='Anticipo',
+                    type='income',
+                    work=work
+                )
+
+                if transaction is not None:
+                    work_with_employees = Work.objects.get(id=work.id)
+                    work_serializer = WorkDetailSerializer(work_with_employees)
+                    return Response(work_serializer.data)
+                else:
+                    return Response({'message': 'Algo falló al crear el trabajo'}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 return Response({'message': 'Algo falló al crear el trabajo'}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
