@@ -6,6 +6,7 @@ from service.models import Service
 from employee.models import Employee
 from financials.models import Transaction
 from .serializers.common import WorkListSerializer, WorkDetailSerializer
+from .utils import validate_works_dates
 from rest_framework.permissions import IsAuthenticated
 
 
@@ -21,6 +22,7 @@ class WorkViewSet(viewsets.ModelViewSet):
 
 
 class CreateWork(views.APIView):
+
     def post(self, request):
         try:
             data = request.data
@@ -30,6 +32,8 @@ class CreateWork(views.APIView):
                 return Response({'message': 'Servicio no existente o inválido'}, status=status.HTTP_400_BAD_REQUEST)
             if not data.get('employeesId') or data['employeesId'] is None or len(data['employeesId']) < 1:
                 return Response({'message': 'Empleados nos existentes o inválidos'}, status=status.HTTP_400_BAD_REQUEST)
+            if not validate_works_dates(data['dateStart'], data['dateEnd']):
+                return Response({'message': 'Las fecha de inicio no puede ser después de la fecha de fin del trabajo'}, status=status.HTTP_400_BAD_REQUEST)
             client = Client.objects.get(id=data['clientId'])
             service = Service.objects.get(id=data['serviceId'])
             work = Work.objects.create(
