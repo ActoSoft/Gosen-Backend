@@ -1,0 +1,24 @@
+.env
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+__pycache__/
+*.py[cod]
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+.env
+db.sqlite3
+*.sqlite3
+gosenProject/db.sqlite3
+.idea/
+gosenProject/.idea/
+.vscode
+gosenProject/media/
