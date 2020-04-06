@@ -12,7 +12,6 @@ from django.http import JsonResponse
 
 class PotentialEmployeeViewSet(viewsets.ModelViewSet):
     queryset = PotentialEmployee.objects.filter(deleted__isnull=True)
-    # permission_classes = (IsAuthenticated, )
 
     def get_serializer_class(self):
         if self.request.method in ['GET']:

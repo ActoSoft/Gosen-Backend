@@ -22,3 +22,4 @@ gosenProject/db.sqlite3
 gosenProject/.idea/
 .vscode
 gosenProject/media/
+static/

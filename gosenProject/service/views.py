@@ -1,4 +1,5 @@
 from rest_framework import viewsets, status
+from rest_framework.permissions import IsAuthenticated
 from .models import Service
 from .serializers.common import ServiceSerializer, ServiceListSerializer
 import datetime
@@ -9,6 +10,7 @@ from django.http import JsonResponse
 class ServiceViewSet(viewsets.ModelViewSet):
     queryset = Service.objects.filter(deleted__isnull=True)
     serializer_class = ServiceSerializer
+    permission_classes = (IsAuthenticated, )
 
     def get_serializer_class(self):
         if self.action == "list":
