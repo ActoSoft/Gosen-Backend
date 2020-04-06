@@ -12,7 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class WorkViewSet(viewsets.ModelViewSet):
     queryset = Work.objects.filter(deleted__isnull=True)
-    # permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, )
 
     def get_serializer_class(self):
         if self.action == 'retrieve':
@@ -22,6 +22,7 @@ class WorkViewSet(viewsets.ModelViewSet):
 
 
 class CreateWork(views.APIView):
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request):
         try:
@@ -76,6 +77,8 @@ class CreateWork(views.APIView):
 
 
 class UpdateWork(views.APIView):
+    permission_classes = (IsAuthenticated,)
+
     def post(self, request):
         try:
             data = request.data

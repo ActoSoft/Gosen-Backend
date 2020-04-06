@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.filter(deleted__isnull=True)
-    # permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, )
 
     def get_serializer_class(self):
         if self.action == 'retrieve':
@@ -33,6 +33,8 @@ class ProductViewSet(viewsets.ModelViewSet):
 
 
 class UploadImage(views.APIView):
+    permission_classes = (IsAuthenticated, )
+
     def post(self, request):
         try:
             print(request.data)
@@ -55,6 +57,8 @@ class UploadImage(views.APIView):
 
 
 class DeleteImage(views.APIView):
+    permission_classes = (IsAuthenticated, )
+
     def post(self, request):
         try:
             product_image = ProductImage.objects.get(id=request.data['id'])
@@ -68,6 +72,8 @@ class DeleteImage(views.APIView):
 
 
 class SaveStock(views.APIView):
+    permission_classes = (IsAuthenticated, )
+
     def post(self, request):
         try:
             if not request.data.get('stock'):
@@ -94,6 +100,8 @@ class SaveStock(views.APIView):
 
 
 class UpdateQtyInStock(views.APIView):
+    permission_classes = (IsAuthenticated, )
+
     def post(self, request):
         try:
             if not request.data.get('id'):
@@ -114,6 +122,8 @@ class UpdateQtyInStock(views.APIView):
 
 
 class DeleteStock(views.APIView):
+    permission_classes = (IsAuthenticated, )
+
     def post(self, request):
         try:
             if not request.data.get('id'):

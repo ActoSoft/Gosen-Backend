@@ -1,4 +1,5 @@
 from rest_framework import viewsets, status, views
+from rest_framework.permissions import IsAuthenticated
 from .models import Admin
 from rest_framework.response import Response
 from Admin.serializers.common import AdminListSerializer, AdminDetailSerializer, AdminSerializerWrite
@@ -8,7 +9,7 @@ from django.http import JsonResponse
 
 class AdminViewSet(viewsets.ModelViewSet):
     queryset = Admin.objects.filter(deleted__isnull=True)
-    # permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, )
 
     def get_serializer_class(self):
         if self.request.method in ['GET']:
@@ -30,6 +31,8 @@ class AdminViewSet(viewsets.ModelViewSet):
 
 
 class UpdateImage(views.APIView):
+    permission_classes = (IsAuthenticated,)
+
     def post(self, request):
         admin = Admin.objects.get(id=request.data['id'])
         if request.data.get('photo'):

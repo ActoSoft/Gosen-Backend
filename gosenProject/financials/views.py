@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from .models import Financial, Transaction
+from rest_framework.permissions import IsAuthenticated
 from works.models import Work
 from works.serializers.common import WorkDetailSerializer
 from .serializers.common import FinancialSerializer, TransactionListSerializer, TransactionDetailSerializer
 import datetime
 from rest_framework import viewsets, status, views
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
 
 
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.filter(deleted__isnull=True)
-    # permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, )
 
     def get_serializer_class(self):
         if self.action == 'retrieve':
@@ -32,6 +32,8 @@ class TransactionViewSet(viewsets.ModelViewSet):
 
 
 class AddTransactionRelatedToWork(views.APIView):
+    permission_classes = (IsAuthenticated, )
+
     def post(self, request):
         try:
             work = Work.objects.get(id=request.data['work'])

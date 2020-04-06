@@ -1,4 +1,5 @@
 from rest_framework import viewsets, status, views
+from rest_framework.permissions import IsAuthenticated
 from .models import Employee
 from rest_framework.response import Response
 from .serializers.common import EmployeeDetailSerializer, EmployeeSerializerWrite, EmployeeListSerializer
@@ -8,7 +9,7 @@ from django.http import JsonResponse
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.filter(deleted__isnull=True)
-    # permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, )
 
     def get_serializer_class(self):
         if self.request.method in ['GET']:
@@ -30,6 +31,8 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
 
 class UpdateImage(views.APIView):
+    permission_classes = (IsAuthenticated,)
+
     def post(self, request):
         employee = Employee.objects.get(id=request.data['id'])
         if request.data.get('photo'):
