@@ -10,7 +10,7 @@ django-braces==1.13.0
 django-cors-headers==3.0.2
 django-rest-passwordreset==1.0.0
 django-rest-swagger==2.2.0
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 idna==2.8
 itypes==1.1.0
